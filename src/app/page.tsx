@@ -150,7 +150,7 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             <Mail className="mr-2 h-5 w-5" />
-            Let's Collaborate on Upwork
+            Let&#39;s Collaborate on Upwork
           </Button>
         </section>
       </main>
