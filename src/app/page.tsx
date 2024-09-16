@@ -71,6 +71,11 @@ export default function Home() {
 
     const handleResize = () => {
       resizeCanvas();
+      // Optional: Reset particles on resize for better visual consistency
+      particles.forEach(particle => {
+        particle.x = Math.random() * canvas.width;
+        particle.y = Math.random() * canvas.height;
+      });
     };
 
     window.addEventListener('resize', handleResize);
@@ -96,14 +101,13 @@ export default function Home() {
 
         {/* Introduction */}
         <section className="text-center max-w-2xl">
-  <h2 className="text-2xl font-semibold text-red-500 mb-2">Fresh Talent, Boundless Enthusiasm</h2>
-  <p className="text-sm leading-relaxed">
-    As a new freelancer on Upwork, I&#39;m excited to bring fresh perspectives and innovative ideas to your web projects. 
-    I&#39;m committed to delivering high-quality solutions and building long-lasting client relationships. Let&#39;s create 
-    something amazing together and grow our portfolios side by side!
-  </p>
-</section>
-
+          <h2 className="text-2xl font-semibold text-red-500 mb-2">Fresh Talent, Boundless Enthusiasm</h2>
+          <p className="text-sm leading-relaxed">
+            As a new freelancer on Upwork, I&#39;m excited to bring fresh perspectives and innovative ideas to your web projects. 
+            I&#39;m committed to delivering high-quality solutions and building long-lasting client relationships. Let&#39;s create 
+            something amazing together and grow our portfolios side by side!
+          </p>
+        </section>
 
         {/* Rate Highlights */}
         <section className="flex justify-center space-x-8 w-full">
