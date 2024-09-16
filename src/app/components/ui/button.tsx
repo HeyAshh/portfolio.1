@@ -13,10 +13,8 @@ const Button: FC<ButtonProps & AnchorHTMLAttributes<HTMLAnchorElement>> = ({ chi
 
   if (asLink && href) {
     return (
-      <Link href={href} passHref>
-        <a className={`${baseClasses} ${className}`} {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}>
-          {children}
-        </a>
+      <Link href={href} className={`${baseClasses} ${className}`} {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}>
+        {children}
       </Link>
     );
   }
