@@ -1,22 +1,22 @@
-'use client';
-
-import { ButtonHTMLAttributes, FC, ReactNode } from 'react';
+import { ButtonHTMLAttributes, AnchorHTMLAttributes, FC, ReactNode } from 'react';
 import Link from 'next/link';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   asLink?: boolean;
   href?: string;
   children: ReactNode;
+  className?: string;
 }
 
-const Button: FC<ButtonProps> = ({ children, asLink, href, className = '', ...props }) => {
-  const baseClasses =
-    "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 rounded-md px-8 bg-red-600 hover:bg-red-700 text-white";
+const Button: FC<ButtonProps & AnchorHTMLAttributes<HTMLAnchorElement>> = ({ children, asLink, href, className = '', ...props }) => {
+  const baseClasses = "px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded";
 
   if (asLink && href) {
     return (
-      <Link href={href} {...props} className={`${baseClasses} ${className}`}>
-        {children}
+      <Link href={href} passHref>
+        <a className={`${baseClasses} ${className}`} {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}>
+          {children}
+        </a>
       </Link>
     );
   }
