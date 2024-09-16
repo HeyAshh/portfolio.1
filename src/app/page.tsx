@@ -1,8 +1,34 @@
 'use client';
 
-import { Button } from "./components/ui/button";
-import { Mail, DollarSign, Layout, Star } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { Mail, DollarSign, Layout, Star } from 'lucide-react';
+
+interface ButtonProps {
+  children: React.ReactNode;
+  asLink?: boolean;
+  href?: string;
+  className?: string;
+}
+
+const Button: React.FC<ButtonProps> = ({ children, asLink, href, className = '', ...props }) => {
+  const baseClasses =
+    'inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-11 rounded-md px-8 bg-red-600 hover:bg-red-700 text-white';
+
+  if (asLink && href) {
+    return (
+      <Link href={href} {...props} className={`${baseClasses} ${className}`}>
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <button className={`${baseClasses} ${className}`} {...props}>
+      {children}
+    </button>
+  );
+};
 
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -30,7 +56,7 @@ export default function Home() {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5
+        vy: (Math.random() - 0.5) * 0.5,
       });
     }
 
@@ -38,7 +64,7 @@ export default function Home() {
       requestAnimationFrame(animate);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      particles.forEach(particle => {
+      particles.forEach((particle) => {
         particle.x += particle.vx;
         particle.y += particle.vy;
 
@@ -50,7 +76,7 @@ export default function Home() {
         ctx.fillStyle = 'rgba(255, 59, 48, 0.7)';
         ctx.fill();
 
-        particles.forEach(otherParticle => {
+        particles.forEach((otherParticle) => {
           if (particle === otherParticle) return;
           const dx = particle.x - otherParticle.x;
           const dy = particle.y - otherParticle.y;
@@ -71,8 +97,7 @@ export default function Home() {
 
     const handleResize = () => {
       resizeCanvas();
-      // Optional: Reset particles on resize for better visual consistency
-      particles.forEach(particle => {
+      particles.forEach((particle) => {
         particle.x = Math.random() * canvas.width;
         particle.y = Math.random() * canvas.height;
       });
@@ -103,9 +128,8 @@ export default function Home() {
         <section className="text-center max-w-2xl">
           <h2 className="text-2xl font-semibold text-red-500 mb-2">Fresh Talent, Boundless Enthusiasm</h2>
           <p className="text-sm leading-relaxed">
-            As a new freelancer on Upwork, I&#39;m excited to bring fresh perspectives and innovative ideas to your web projects. 
-            I&#39;m committed to delivering high-quality solutions and building long-lasting client relationships. Let&#39;s create 
-            something amazing together and grow our portfolios side by side!
+            As a new freelancer on Upwork, I&#39;m excited to bring fresh perspectives and innovative ideas to your web projects.
+            I&#39;m committed to delivering high-quality solutions and building long-lasting client relationships. Let&#39;s create something amazing together and grow our portfolios side by side!
           </p>
         </section>
 
@@ -130,12 +154,12 @@ export default function Home() {
           <h3 className="text-xl font-semibold text-red-500 mb-3">Why Choose a Rising Star?</h3>
           <ul className="grid grid-cols-2 gap-2 text-sm">
             {[
-              "Eager to exceed expectations",
-              "Fresh, innovative ideas",
-              "Flexible and adaptive",
-              "Competitive rates",
-              "Dedicated to your success",
-              "Building long-term relationships",
+              'Eager to exceed expectations',
+              'Fresh, innovative ideas',
+              'Flexible and adaptive',
+              'Competitive rates',
+              'Dedicated to your success',
+              'Building long-term relationships',
             ].map((point, index) => (
               <li key={index} className="flex items-start">
                 <Star className="mr-2 h-4 w-4 text-red-500 flex-shrink-0 mt-1" />
